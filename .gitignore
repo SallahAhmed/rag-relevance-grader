@@ -190,6 +190,9 @@ delegate-skills/
 .env.*
 !.env.example
 
+# Raw per-pair predictions (bulky intermediates — metrics JSONs are the artifacts)
+results/predictions_*.json
+
 # Data (large, re-downloadable)
 data/raw/
 data/*.tar.gz
