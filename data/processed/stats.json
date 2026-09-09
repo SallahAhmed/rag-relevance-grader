@@ -1,0 +1,35 @@
+{
+  "n_pairs": 11386,
+  "n_missing_text": 0,
+  "label_counts": {
+    "irrelevant": 7780,
+    "partial": 1940,
+    "relevant": 1666
+  },
+  "n_train_queries": 44,
+  "n_test_queries": 10,
+  "n_train_pairs": 9264,
+  "n_test_pairs": 2122,
+  "test_qids": [
+    "1109707",
+    "1127540",
+    "1133579",
+    "1136047",
+    "169208",
+    "23849",
+    "258062",
+    "47210",
+    "673670",
+    "877809"
+  ],
+  "train_label_counts": {
+    "irrelevant": 6282,
+    "partial": 1640,
+    "relevant": 1342
+  },
+  "test_label_counts": {
+    "irrelevant": 1498,
+    "partial": 300,
+    "relevant": 324
+  }
+}

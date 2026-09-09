@@ -1,0 +1,21 @@
+# Core ML stack (install locally AND in Colab)
+transformers>=4.40.0
+torch>=2.2.0
+bitsandbytes>=0.43.0
+accelerate>=1.0.0
+peft>=0.13.0
+trl>=0.9.0
+datasets>=2.20.0
+# Metrics, config, data handling
+scikit-learn>=1.4.0
+pyyaml>=6.0
+numpy>=1.26.0
+pandas>=2.1.0
+pyarrow>=16.0.0
+# Experiment tracking
+wandb>=0.18.0
+
+# NOTE: `unsloth` is intentionally NOT listed here. It must match the exact
+# torch/CUDA build of the machine and is installed inside notebook 03
+# (Colab T4 cell) via:  pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
+# Standard TRL + PEFT (listed above) is the fallback and needs no extra install.

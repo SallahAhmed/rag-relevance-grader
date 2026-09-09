@@ -1,0 +1,52 @@
+model:
+  base_model: Qwen/Qwen2.5-1.5B-Instruct
+  load_in_4bit: true
+  quantization: nf4
+  compute_dtype: float16
+  double_quant: true
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+training:
+  learning_rate: 2e-4
+  lr_scheduler: cosine
+  warmup_ratio: 0.05
+  epochs: 1
+  per_device_batch_size: 4
+  gradient_accumulation_steps: 4
+  max_seq_length: 1024
+  gradient_checkpointing: true
+  optimizer: paged_adamw_8bit
+  seed: 42
+
+evaluation:
+  split_strategy: group_by_query
+  test_queries: 10
+  metrics:
+    - accuracy
+    - macro_f1
+    - per_class_f1
+    - confusion_matrix
+    - mmlu_forgetting_check
+  mmlu_forgetting_bar: "fine-tuned >= 90% of baseline"
+
+dataset:
+  source: TREC_DL_2020
+  bucket_plan: "0->irrelevant, 1->partial, 2-3->relevant"
+  format: "query, passage, label"
+
+experiment:
+  wandb_project: "rag-relevance-grader"
+  wandb_entity: "sallahahmed"
+  hf_model_id: "sallahahmed/qwen2.5-1.5b-relevance-grader"
