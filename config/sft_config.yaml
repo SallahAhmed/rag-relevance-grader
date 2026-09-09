@@ -19,7 +19,8 @@ lora:
     - down_proj
 
 training:
-  learning_rate: 2e-4
+  # NOTE: plain decimals only — YAML parses `2e-4` as a STRING (loader coerces anyway).
+  learning_rate: 0.0002
   lr_scheduler: cosine
   warmup_ratio: 0.05
   epochs: 1

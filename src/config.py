@@ -101,6 +101,17 @@ def default_config_path() -> Path:
     raise FileNotFoundError("config/sft_config.yaml not found above " + str(here))
 
 
+def _coerce(mapping: dict, key: str, kind, section: str):
+    """YAML trap: `2e-4` parses as str. Coerce numerics loudly or fail."""
+    if key not in mapping:
+        return mapping
+    try:
+        mapping[key] = kind(mapping[key])
+    except (TypeError, ValueError) as exc:
+        raise ValueError(f"[{section}] {key}={mapping[key]!r} is not a {kind.__name__}") from exc
+    return mapping
+
+
 def load_config(path: str | Path | None = None) -> SFTConfig:
     """Load and validate the YAML config into typed dataclasses."""
     cfg_path = Path(path) if path else default_config_path()
@@ -109,9 +120,20 @@ def load_config(path: str | Path | None = None) -> SFTConfig:
     try:
         model = ModelConfig(**raw.get("model", {}))
         lora_raw = dict(raw.get("lora", {}))
-        lora_raw["target_modules"] = tuple(lora_raw.get("target_modules", LoRAConfig.target_modules))
+        lora_raw["target_modules"] = tuple(
+            lora_raw.get("target_modules", LoRAConfig.target_modules)
+        )
+        for key in ("r", "alpha"):
+            _coerce(lora_raw, key, int, "lora")
+        _coerce(lora_raw, "dropout", float, "lora")
         lora = LoRAConfig(**lora_raw)
-        training = TrainingConfig(**raw.get("training", {}))
+        train_raw = dict(raw.get("training", {}))
+        for key in ("epochs", "per_device_batch_size", "gradient_accumulation_steps",
+                    "max_seq_length", "seed"):
+            _coerce(train_raw, key, int, "training")
+        for key in ("learning_rate", "warmup_ratio"):
+            _coerce(train_raw, key, float, "training")
+        training = TrainingConfig(**train_raw)
         eval_raw = dict(raw.get("evaluation", {}))
         if "metrics" in eval_raw:
             eval_raw["metrics"] = tuple(eval_raw["metrics"])
