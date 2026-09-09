@@ -145,7 +145,15 @@ def maybe_wandb_login(project: str) -> bool:
         return False
     import wandb
 
-    wandb.login(key=key_file.read_text().strip())
+    try:
+        key = key_file.read_text().strip()
+        if len(key) < 8:
+            raise ValueError("key file present but empty/short")
+        wandb.login(key=key)
+    except Exception as exc:
+        print(f"wandb login failed ({exc}) — continuing with logging disabled")
+        os.environ["WANDB_DISABLED"] = "true"
+        return False
     print(f"wandb: logged in, project={project}")
     return True
 
@@ -316,10 +324,39 @@ def run(smoke: bool = False) -> str:
         )
     )
     print("saved:", out_dir)
+    push_adapter_to_hub(out_dir, cfg.experiment.hf_model_id, smoke)
     return out_dir
 
 
 # %%
+def push_adapter_to_hub(out_dir: str, repo_id: str, smoke: bool) -> bool:
+    """Push the adapter from INSIDE the run (2026-09-09 lesson: the VM that
+    produced 78 min of training was reclaimed 40s after exec end, before any
+    download — off-VM weights must never depend on a later step).
+
+    Token comes from /content/.hfkey (uploaded file, never code). Any failure
+    warns and returns False — an 80-minute run is never failed by its upload.
+    Skipped for smoke runs.
+    """
+    if smoke:
+        return False
+    key_file = Path("/content/.hfkey")
+    if not key_file.is_file():
+        print("hub: no key file — skipping push (download the adapter instead)")
+        return False
+    try:
+        from huggingface_hub import HfApi
+
+        api = HfApi(token=key_file.read_text().strip())
+        api.create_repo(repo_id, exist_ok=True)
+        api.upload_folder(repo_id=repo_id, folder_path=out_dir)
+        print("hub: pushed", repo_id)
+        return True
+    except Exception as exc:
+        print(f"hub: push failed ({exc}) — download the adapter instead")
+        return False
+
+
 def main() -> None:
     run(smoke=False)
 

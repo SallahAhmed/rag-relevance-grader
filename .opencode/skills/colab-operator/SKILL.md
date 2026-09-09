@@ -69,6 +69,21 @@ Do not edit the reference sections below — project wiring lives at the bottom.
 ## Recovery
 - "Session not found" / 404 / 401 on exec: the backend pruned the VM. Re-create with `colab new`.
 - Execution timeout or wedged kernel: `colab restart-kernel -s <name>` (keeps the VM, resets the kernel), or `colab stop` then `colab new`.
+- **2026-09-09 incident (pb-train): after a 78-min T4 run, the backend
+  terminated the VM ~40s after the final exec returned — before artifacts
+  were downloaded. Root causes: (1) no keep-alive daemon was running for
+  the GPU session (daemons existed only for the CPU sessions — verify with
+  `ps aux | grep colab` after every `colab new --gpu`); (2) nothing had been
+  pushed off-VM mid-run. Rules from this:**
+  - **Long runs push artifacts THEMSELVES**: the training script uploads the
+    adapter to the Hub as its final step (token via uploaded key file, never
+    in code). `colab download` afterwards is belt-and-suspenders, not the plan.
+  - **Split runs >45 min into chunks** with a download/Hub-push between them
+    (resume_from_checkpoint for training).
+  - **A `412 Precondition Failed` / `TooManyAssignmentsError` on `colab new
+    --gpu` means backend quota/capacity** (or a dead assignment still counted).
+    Do not hammer — wait, then retry once; if persistent, report to the user
+    (Kaggle fallback) instead of burning calls.
 
 ## Project wiring (finetune — agent must read this)
 - **Binary**: `/home/salla/miniconda3/bin/colab` (miniconda3). It is NOT on a non-interactive shell's PATH — always invoke via this absolute path through `wsl`, e.g. `wsl /home/salla/miniconda3/bin/colab sessions`. Never bare `colab`.
