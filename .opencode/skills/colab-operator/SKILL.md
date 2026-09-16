@@ -69,6 +69,18 @@ Do not edit the reference sections below — project wiring lives at the bottom.
 ## Recovery
 - "Session not found" / 404 / 401 on exec: the backend pruned the VM. Re-create with `colab new`.
 - Execution timeout or wedged kernel: `colab restart-kernel -s <name>` (keeps the VM, resets the kernel), or `colab stop` then `colab new`.
+- **2026-09-09 incident x2 (pb-train, pb-train2): backend reclaimed the T4 VM
+  <60s after a ~75-min exec returned — adapter lost twice.** Deeper root cause
+  found on the second occurrence: the keep-alive daemon does NOT survive the
+  end of a non-interactive `wsl` call (`ps` shows daemons only moments after
+  `new`; after any gap, zero daemons). So after a long exec ends there is
+  effectively NO protection — treat every post-exec minute as borrowed time:
+  - **Download FIRST, diagnose later**: the immediate next call after any long
+    exec downloads artifacts. No status checks, no log reads in between.
+  - Token lesson from the same night: a 403 "no rights to create under
+    namespace X" means the (valid, authenticated) token lacks scope for that
+    repo — fix by creating the repos on the website and/or widening the
+    token, then re-verify with an actual write attempt, never assume.
 - **2026-09-09 incident (pb-train): after a 78-min T4 run, the backend
   terminated the VM ~40s after the final exec returned — before artifacts
   were downloaded. Root causes: (1) no keep-alive daemon was running for

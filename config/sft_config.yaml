@@ -49,5 +49,7 @@ dataset:
 
 experiment:
   wandb_project: "rag-relevance-grader"
-  wandb_entity: "sallahahmed"
+  # Verified 2026-09-09 via live wandb login: user=salahahmed,
+  # default entity=salahahmed-canadian-international-college.
+  wandb_entity: "salahahmed-canadian-international-college"
   hf_model_id: "sallahahmed/qwen2.5-1.5b-relevance-grader"

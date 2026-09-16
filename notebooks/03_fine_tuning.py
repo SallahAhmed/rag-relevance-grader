@@ -284,6 +284,9 @@ def run(smoke: bool = False) -> str:
 
     if not smoke:
         use_wandb = maybe_wandb_login(cfg.experiment.wandb_project)
+        if use_wandb:
+            # Pin the run to our portfolio project (else it lands in Untagged).
+            os.environ["WANDB_PROJECT"] = cfg.experiment.wandb_project
     else:
         os.environ["WANDB_DISABLED"] = "true"
         use_wandb = False
