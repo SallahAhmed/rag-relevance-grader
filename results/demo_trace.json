@@ -1,0 +1,298 @@
+{
+  "arms": {
+    "off": {
+      "answer": "You should try grinding finer by one notch than your current setting. Passage number:[2]\n\nSteaming milk is a separate skill from pulling espresso: introduce air during the first third of the pitcher, then drop the wand below the surface to roll the milk until it reaches about 60 degrees. Pushing the steam any harder just makes large fast bubbles you cannot texture.\n\nGrind size sets flow rate",
+      "context_ids": [
+        4,
+        0,
+        1,
+        7
+      ],
+      "generator_id": "qwen-local",
+      "graded": [],
+      "grounded": true,
+      "n_kept": 4,
+      "n_retrieved": 4,
+      "note": "",
+      "query": "My espresso comes out thin and gushes out far too fast. What should I change?",
+      "retrieved": [
+        {
+          "chunk_id": 4,
+          "score": 0.4768814146518707,
+          "source": "espresso/p5",
+          "text": "Steaming milk is a separate skill from pulling espresso: introduce air during the first third of the pitcher, then drop the wand below the surface to roll the milk until it reaches about 60 degrees. Pushing the steam any harder just makes large fast bubbles you cannot texture."
+        },
+        {
+          "chunk_id": 0,
+          "score": 0.4333435297012329,
+          "source": "espresso/p1",
+          "text": "Grind size sets flow rate. A coarse grind leaves large gaps for water to rush through, so the shot pours in seconds, the crema looks pale, and the cup tastes thin and sour at the same time. Finer by one notch is usually the whole fix."
+        },
+        {
+          "chunk_id": 1,
+          "score": 0.3899224102497101,
+          "source": "espresso/p2",
+          "text": "Brew pressure should reach about nine bars at the group head. If the pump never gets there the puck is too coarse to resist the water, and if the gauge sits pinned at zero the puck may be too tight or the basket blocked."
+        },
+        {
+          "chunk_id": 7,
+          "score": 0.34025925397872925,
+          "source": "espresso/p8",
+          "text": "A leak from the group head is a gasket problem, not a taste problem. Replace the gasket when water drips from under the portafilter after the shot is pulled, and check that the basket is seated before blaming the grinder."
+        }
+      ],
+      "used_grader": false
+    },
+    "on": {
+      "answer": "You need to use a finer grind setting. Passage [1] Passage [1]: \"Grind size sets flow rate.\" Passage [1]: \"A coarse grind leaves large gaps for water to rush through,\" Passage [1]: \"so the shot pours in seconds,\" Passage [1]: \"the crema looks pale,\" Passage [1]: \"and the cup tastes thin and sour at the same",
+      "context_ids": [
+        0
+      ],
+      "generator_id": "qwen-local",
+      "graded": [
+        {
+          "accepted": false,
+          "chunk_id": 7,
+          "confidence": 0.8505457043647766,
+          "label": "irrelevant",
+          "rank": 1,
+          "retrieval_score": 0.34025925397872925,
+          "score": 0.8505457043647766,
+          "source": "espresso/p8",
+          "text": "A leak from the group head is a gasket problem, not a taste problem. Replace the gasket when water drips from under the portafilter after the shot is pulled, and check that the basket is seated before blaming the grinder."
+        },
+        {
+          "accepted": false,
+          "chunk_id": 4,
+          "confidence": 0.7703772187232971,
+          "label": "irrelevant",
+          "rank": 2,
+          "retrieval_score": 0.4768814146518707,
+          "score": 0.7703772187232971,
+          "source": "espresso/p5",
+          "text": "Steaming milk is a separate skill from pulling espresso: introduce air during the first third of the pitcher, then drop the wand below the surface to roll the milk until it reaches about 60 degrees. Pushing the steam any harder just makes large fast bubbles you cannot texture."
+        },
+        {
+          "accepted": true,
+          "chunk_id": 0,
+          "confidence": 0.7659605145454407,
+          "label": "relevant",
+          "rank": 3,
+          "retrieval_score": 0.4333435297012329,
+          "score": 0.7659605145454407,
+          "source": "espresso/p1",
+          "text": "Grind size sets flow rate. A coarse grind leaves large gaps for water to rush through, so the shot pours in seconds, the crema looks pale, and the cup tastes thin and sour at the same time. Finer by one notch is usually the whole fix."
+        },
+        {
+          "accepted": false,
+          "chunk_id": 1,
+          "confidence": 0.7341347336769104,
+          "label": "irrelevant",
+          "rank": 4,
+          "retrieval_score": 0.3899224102497101,
+          "score": 0.7341347336769104,
+          "source": "espresso/p2",
+          "text": "Brew pressure should reach about nine bars at the group head. If the pump never gets there the puck is too coarse to resist the water, and if the gauge sits pinned at zero the puck may be too tight or the basket blocked."
+        }
+      ],
+      "grounded": true,
+      "n_kept": 1,
+      "n_retrieved": 4,
+      "note": "",
+      "query": "My espresso comes out thin and gushes out far too fast. What should I change?",
+      "retrieved": [
+        {
+          "chunk_id": 4,
+          "score": 0.4768814146518707,
+          "source": "espresso/p5",
+          "text": "Steaming milk is a separate skill from pulling espresso: introduce air during the first third of the pitcher, then drop the wand below the surface to roll the milk until it reaches about 60 degrees. Pushing the steam any harder just makes large fast bubbles you cannot texture."
+        },
+        {
+          "chunk_id": 0,
+          "score": 0.4333435297012329,
+          "source": "espresso/p1",
+          "text": "Grind size sets flow rate. A coarse grind leaves large gaps for water to rush through, so the shot pours in seconds, the crema looks pale, and the cup tastes thin and sour at the same time. Finer by one notch is usually the whole fix."
+        },
+        {
+          "chunk_id": 1,
+          "score": 0.3899224102497101,
+          "source": "espresso/p2",
+          "text": "Brew pressure should reach about nine bars at the group head. If the pump never gets there the puck is too coarse to resist the water, and if the gauge sits pinned at zero the puck may be too tight or the basket blocked."
+        },
+        {
+          "chunk_id": 7,
+          "score": 0.34025925397872925,
+          "source": "espresso/p8",
+          "text": "A leak from the group head is a gasket problem, not a taste problem. Replace the gasket when water drips from under the portafilter after the shot is pulled, and check that the basket is seated before blaming the grinder."
+        }
+      ],
+      "used_grader": true
+    }
+  },
+  "corpus": {
+    "description": "Eight notes from a home barista's log. Five bear on a thin, fast shot; three are maintenance tasks that share words with the query.",
+    "expected_gate": "Keep grind, pressure, temperature and channeling; descaling, gasket and milk-steaming notes are maintenance tasks, not answers.",
+    "key": "espresso",
+    "n_passages": 8,
+    "query": "My espresso comes out thin and gushes out far too fast. What should I change?",
+    "title": "Home espresso troubleshooting"
+  },
+  "metrics": {
+    "baseline": {
+      "accuracy": 0.3694627709707823,
+      "confusion_matrix": {
+        "labels": [
+          "irrelevant",
+          "partial",
+          "relevant"
+        ],
+        "matrix": [
+          [
+            483,
+            3,
+            1012
+          ],
+          [
+            34,
+            2,
+            264
+          ],
+          [
+            25,
+            0,
+            299
+          ]
+        ]
+      },
+      "date": "2026-09-09",
+      "macro_f1": 0.26718224872283014,
+      "mmlu_baseline": 0.4975,
+      "mmlu_n": 607,
+      "mmlu_subjects": {
+        "high_school_computer_science": {
+          "acc": 0.58,
+          "n": 100
+        },
+        "high_school_mathematics": {
+          "acc": 0.2519,
+          "n": 270
+        },
+        "high_school_world_history": {
+          "acc": 0.7426,
+          "n": 237
+        }
+      },
+      "mode": "zero-shot",
+      "model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "n": 2122,
+      "n_test_qrels": 2122,
+      "n_test_queries": 10,
+      "per_class": {
+        "irrelevant": {
+          "f1": 0.47352941176470587,
+          "precision": 0.8911439114391144,
+          "recall": 0.32242990654205606,
+          "support": 1498
+        },
+        "partial": {
+          "f1": 0.013114754098360656,
+          "precision": 0.4,
+          "recall": 0.006666666666666667,
+          "support": 300
+        },
+        "relevant": {
+          "f1": 0.3149025803054239,
+          "precision": 0.18984126984126984,
+          "recall": 0.9228395061728395,
+          "support": 324
+        }
+      },
+      "prompt_sha256": "10527ec441f9281a",
+      "test_qids": [
+        "1109707",
+        "1127540",
+        "1133579",
+        "1136047",
+        "169208",
+        "23849",
+        "258062",
+        "47210",
+        "673670",
+        "877809"
+      ]
+    },
+    "finetuned": {
+      "accuracy": 0.644674835061263,
+      "confusion_matrix": {
+        "labels": [
+          "irrelevant",
+          "partial",
+          "relevant"
+        ],
+        "matrix": [
+          [
+            1208,
+            111,
+            179
+          ],
+          [
+            162,
+            40,
+            98
+          ],
+          [
+            152,
+            52,
+            120
+          ]
+        ]
+      },
+      "forgetting": {
+        "bar": 0.9,
+        "baseline_mmlu": 0.4975,
+        "finetuned_mmlu": 0.4712,
+        "passes": true,
+        "retention": 0.9471356783919598
+      },
+      "macro_f1": 0.4306389127095955,
+      "mmlu_finetuned": 0.4712,
+      "model": "Qwen/Qwen2.5-1.5B-Instruct + qlora-sft",
+      "n": 2122,
+      "n_test_qrels": 2122,
+      "n_test_queries": 10,
+      "per_class": {
+        "irrelevant": {
+          "f1": 0.8,
+          "precision": 0.7936925098554534,
+          "recall": 0.8064085447263017,
+          "support": 1498
+        },
+        "partial": {
+          "f1": 0.15904572564612326,
+          "precision": 0.19704433497536947,
+          "recall": 0.13333333333333333,
+          "support": 300
+        },
+        "relevant": {
+          "f1": 0.332871012482663,
+          "precision": 0.3022670025188917,
+          "recall": 0.37037037037037035,
+          "support": 324
+        }
+      },
+      "prompt_sha256": "10527ec441f9281a"
+    }
+  },
+  "model": {
+    "adapter_ref": "sallahahmed/qwen2.5-1.5b-relevance-grader",
+    "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "device": "cpu",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "load_error": null,
+    "max_new_tokens": 80,
+    "quantized": false,
+    "top_k": 4,
+    "using_adapter": true
+  },
+  "recorded_from": "src/record_demo_trace.py"
+}

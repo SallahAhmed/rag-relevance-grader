@@ -1,0 +1,23 @@
+# Retrieval + GUI layer for src/rag_pipeline.py and the Hugging Face Space.
+#
+# Installs alongside the training stack in the root requirements.txt — this file
+# only adds what retrieval and the Streamlit demo need on top of it.
+#
+# Constraint: no hosted embeddings and no hosted generation. Everything below
+# runs locally on CPU or a free GPU; no API key exists anywhere in this project.
+
+# Retrieval
+sentence-transformers>=3.0.0  # local all-MiniLM-L6-v2 embeddings (default)
+faiss-cpu>=1.8.0              # exact inner-product index over normalised vectors
+
+# GUI (space/app.py). The Space itself pins 1.51.0; app.py sticks to widgets
+# and kwargs that work across the 1.3x-1.5x range (use_container_width is
+# deprecated and width= only exists from 1.49, so app.py passes neither).
+streamlit>=1.37.0
+
+# Already required by the training stack; repeated here so this file is
+# installable on its own for a Space build.
+torch>=2.2.0
+transformers>=4.40.0
+peft>=0.13.0
+numpy>=1.26.0

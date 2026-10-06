@@ -44,7 +44,7 @@ def main() -> int:
         **metrics,
     }
     (ROOT / "results" / "finetuned_results.json").write_text(
-        json.dumps(finetuned, indent=2, sort_keys=True) + "\n"
+        json.dumps(finetuned, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
 
     b, f = baseline["macro_f1"], metrics["macro_f1"]
@@ -61,14 +61,16 @@ def main() -> int:
     lines = [
         "| Metric | Zero-shot | Fine-tuned (QLoRA) | Δ |",
         "|---|---|---|---|",
-        *[f"| {name} | {x:.4f} | {y:.4f} | {y - x:+.4f} |" for name, x, y in rows],
+        *[f"| {name} | {x:.4f} | {y:.4f} | {(y - x) * 100:+.1f} pp |" for name, x, y in rows],
         "",
         f"_Eval: {baseline['n_test_queries']} test queries / {len(ft_preds)} qrels "
         f"(held out by whole query). Macro-F1 on ~10 queries is directional, "
         f"not tight. MMLU retention {forget['retention']:.3f} "
         f"(bar ≥ {FORGETTING_RETENTION_BAR})._",
     ]
-    (ROOT / "results" / "before_after_table.md").write_text("\n".join(lines) + "\n")
+    (ROOT / "results" / "before_after_table.md").write_text(
+        "\n".join(lines) + "\n", encoding="utf-8"
+    )
 
     print(f"macro-F1: {b:.4f} → {f:.4f} (Δ {delta:+.4f}, bar +{F1_BAR_PP}) "
           f"→ {'PASS' if f1_pass else 'FAIL'}")

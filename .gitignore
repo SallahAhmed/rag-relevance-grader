@@ -189,6 +189,10 @@ delegate-skills/
 .env
 .env.*
 !.env.example
+.hfkey
+.hfkey.*
+*.tmp
+logs/
 
 # Raw per-pair predictions (bulky intermediates — metrics JSONs are the artifacts)
 results/predictions_*.json
@@ -212,3 +216,4 @@ wandb/
 Thumbs.db
 .vscode/
 .idea/
+.gstack/

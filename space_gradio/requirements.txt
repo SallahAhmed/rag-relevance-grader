@@ -1,0 +1,36 @@
+# ZeroGPU Space for space_gradio/app.py (free GPU, no paid plan needed).
+#
+# DELIBERATELY NOT LISTED: `gradio` and `torch`.
+#   gradio — pinned by the Space front matter (sdk_version) and pre-installed
+#            by HF; a pin here risks downgrading the image's build.
+#   torch   — the ZeroGPU image ships a CUDA-enabled torch; a pin here lets pip
+#            resolve a CPU-only wheel, which silently removes the GPU.
+#
+# WHY transformers 5.x: the image pins gradio 6.29.0, which requires
+# huggingface-hub >=1.16. transformers 4.x hard-caps huggingface-hub at <1.0, so
+# 4.x + gradio 6.29 is unsatisfiable (that was build error #1). transformers 5.x
+# requires huggingface-hub >=1.5,<2.0, which intersects gradio's range.
+# Verified against PyPI metadata, not guessed.
+#
+# NOTE: the notebooks still run transformers 4.x on Colab (root
+# requirements.txt). src/rag_pipeline.py is written to work on both — it uses
+# `dtype=` and the stable Auto*/BitsAndBytesConfig surface.
+
+spaces>=0.4
+
+# Grading + generation
+transformers>=5.13.0,<6
+huggingface-hub>=1.16.0,<2.0
+peft>=0.21.0
+accelerate>=1.0.0
+bitsandbytes>=0.45.0
+safetensors>=0.4.0
+
+# Retrieval (CPU side)
+sentence-transformers>=5.0,<7
+faiss-cpu>=1.8.0
+numpy>=1.26.0,<3
+
+# src/config.py reads the YAML config (HF ids) when present, so the Space needs
+# pyyaml even though the demo tolerates its absence.
+pyyaml>=6.0
