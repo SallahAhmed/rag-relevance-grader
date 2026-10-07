@@ -1,0 +1,299 @@
+{
+  "arms": {
+    "off": {
+      "answer": "The free Colab T4 has 16 GB of VRAM. To fit a fine-tune into it, you trade away the ability to use larger per-device batch sizes due to the limitation imposed by the smaller model count parameter compared to paid instances like the A100 or L4 cards. Specifically, the tutorial's script would OOM on the free tier because it assumes a larger batch size that doesn't apply here due to the lower GPU capacity. Additionally, since the T4 lacks tensor cores, BF16 matrix multiplications may run slower than FP16 operations when running models quantized for FP16 precision. Therefore, while the T4 provides sufficient resources for training tasks without requiring significant adjustments to the model parameters or data preprocessing steps typically needed for larger GPUs, its",
+      "context_ids": [
+        0,
+        3,
+        4,
+        6
+      ],
+      "generator_id": "qwen-local",
+      "graded": [],
+      "grounded": true,
+      "n_kept": 4,
+      "n_retrieved": 4,
+      "note": "",
+      "query": "How much VRAM does a free Colab T4 have, and what do I trade away to fit a fine-tune into it?",
+      "retrieved": [
+        {
+          "chunk_id": 0,
+          "score": 0.6031069755554199,
+          "source": "colab-t4/p1",
+          "text": "Free Colab sessions are assigned an NVIDIA T4 with 16 GB of VRAM. That number, not the parameter count of your model, is what decides the largest per-device batch size you can use, and it is why tutorials that fit on a paid instance OOM on the free tier."
+        },
+        {
+          "chunk_id": 3,
+          "score": 0.48008057475090027,
+          "source": "colab-t4/p4",
+          "text": "The A100 available on paid Colab carries 80 GB of HBM, so scripts that OOM on a T4 will run unquantized with large batches on that card. The hardware is a different generation entirely, so timings do not carry over between the two."
+        },
+        {
+          "chunk_id": 4,
+          "score": 0.4772493243217468,
+          "source": "colab-t4/p5",
+          "text": "The NVIDIA L4 is the newer Ada Lovelace card that appears on some Colab Pro tiers. It offers 24 GB of memory and much higher bandwidth than the T4, which shifts the memory budget in a way that has to be re-measured rather than assumed from T4 numbers."
+        },
+        {
+          "chunk_id": 6,
+          "score": 0.46054530143737793,
+          "source": "colab-t4/p7",
+          "text": "The T4 is a Turing-generation card with 16 GB of GDDR6 memory. It has no tensor cores, so bf16 matrix multiplies are emulated and can run slower than fp16 rather than faster on this hardware."
+        }
+      ],
+      "used_grader": false
+    },
+    "on": {
+      "answer": "A free Colab T4 has 16 GB of VRAM. To fit a fine-tune into it, you trade away the ability for tensor cores which makes matrix multiplication slower compared to FP16 precision. Additionally, since the batch size is limited by the GPU's VRAM capacity, you may need to reduce the learning rate or increase the number of training steps to avoid running out of VRAM during inference. Furthermore, the T4 doesn't support mixed-precision training due to its lack of tensor cores, so you'll need to stick with FP32 precision unless you're willing to sacrifice performance for lower memory usage. Lastly, the T4 doesn't support dynamic batching, meaning you must specify the exact batch size before starting training, which could limit your flexibility if you want to",
+      "context_ids": [
+        0,
+        6
+      ],
+      "generator_id": "qwen-local",
+      "graded": [
+        {
+          "accepted": true,
+          "chunk_id": 0,
+          "confidence": 0.875890851020813,
+          "label": "relevant",
+          "rank": 1,
+          "retrieval_score": 0.6031069755554199,
+          "score": 0.875890851020813,
+          "source": "colab-t4/p1",
+          "text": "Free Colab sessions are assigned an NVIDIA T4 with 16 GB of VRAM. That number, not the parameter count of your model, is what decides the largest per-device batch size you can use, and it is why tutorials that fit on a paid instance OOM on the free tier."
+        },
+        {
+          "accepted": false,
+          "chunk_id": 4,
+          "confidence": 0.5576980710029602,
+          "label": "irrelevant",
+          "rank": 2,
+          "retrieval_score": 0.4772493243217468,
+          "score": 0.5576980710029602,
+          "source": "colab-t4/p5",
+          "text": "The NVIDIA L4 is the newer Ada Lovelace card that appears on some Colab Pro tiers. It offers 24 GB of memory and much higher bandwidth than the T4, which shifts the memory budget in a way that has to be re-measured rather than assumed from T4 numbers."
+        },
+        {
+          "accepted": true,
+          "chunk_id": 6,
+          "confidence": 0.5066635012626648,
+          "label": "relevant",
+          "rank": 3,
+          "retrieval_score": 0.46054530143737793,
+          "score": 0.5066635012626648,
+          "source": "colab-t4/p7",
+          "text": "The T4 is a Turing-generation card with 16 GB of GDDR6 memory. It has no tensor cores, so bf16 matrix multiplies are emulated and can run slower than fp16 rather than faster on this hardware."
+        },
+        {
+          "accepted": false,
+          "chunk_id": 3,
+          "confidence": 0.4100222885608673,
+          "label": "irrelevant",
+          "rank": 4,
+          "retrieval_score": 0.48008057475090027,
+          "score": 0.4100222885608673,
+          "source": "colab-t4/p4",
+          "text": "The A100 available on paid Colab carries 80 GB of HBM, so scripts that OOM on a T4 will run unquantized with large batches on that card. The hardware is a different generation entirely, so timings do not carry over between the two."
+        }
+      ],
+      "grounded": true,
+      "n_kept": 2,
+      "n_retrieved": 4,
+      "note": "",
+      "query": "How much VRAM does a free Colab T4 have, and what do I trade away to fit a fine-tune into it?",
+      "retrieved": [
+        {
+          "chunk_id": 0,
+          "score": 0.6031069755554199,
+          "source": "colab-t4/p1",
+          "text": "Free Colab sessions are assigned an NVIDIA T4 with 16 GB of VRAM. That number, not the parameter count of your model, is what decides the largest per-device batch size you can use, and it is why tutorials that fit on a paid instance OOM on the free tier."
+        },
+        {
+          "chunk_id": 3,
+          "score": 0.48008057475090027,
+          "source": "colab-t4/p4",
+          "text": "The A100 available on paid Colab carries 80 GB of HBM, so scripts that OOM on a T4 will run unquantized with large batches on that card. The hardware is a different generation entirely, so timings do not carry over between the two."
+        },
+        {
+          "chunk_id": 4,
+          "score": 0.4772493243217468,
+          "source": "colab-t4/p5",
+          "text": "The NVIDIA L4 is the newer Ada Lovelace card that appears on some Colab Pro tiers. It offers 24 GB of memory and much higher bandwidth than the T4, which shifts the memory budget in a way that has to be re-measured rather than assumed from T4 numbers."
+        },
+        {
+          "chunk_id": 6,
+          "score": 0.46054530143737793,
+          "source": "colab-t4/p7",
+          "text": "The T4 is a Turing-generation card with 16 GB of GDDR6 memory. It has no tensor cores, so bf16 matrix multiplies are emulated and can run slower than fp16 rather than faster on this hardware."
+        }
+      ],
+      "used_grader": true
+    }
+  },
+  "corpus": {
+    "description": "Eight notes about fitting a fine-tune into a free-tier GPU. Four answer the query; four talk about GPUs and plans that are not the T4.",
+    "expected_gate": "Keep the 16 GB T4, QLoRA 4-bit and gradient-checkpointing notes; the A100, L4, Colab Pro and W&B notes are decoys that match on vocabulary.",
+    "key": "colab-t4",
+    "n_passages": 8,
+    "query": "How much VRAM does a free Colab T4 have, and what do I trade away to fit a fine-tune into it?",
+    "title": "Colab T4 fine-tuning notes"
+  },
+  "metrics": {
+    "baseline": {
+      "accuracy": 0.3694627709707823,
+      "confusion_matrix": {
+        "labels": [
+          "irrelevant",
+          "partial",
+          "relevant"
+        ],
+        "matrix": [
+          [
+            483,
+            3,
+            1012
+          ],
+          [
+            34,
+            2,
+            264
+          ],
+          [
+            25,
+            0,
+            299
+          ]
+        ]
+      },
+      "date": "2026-09-09",
+      "macro_f1": 0.26718224872283014,
+      "mmlu_baseline": 0.4975,
+      "mmlu_n": 607,
+      "mmlu_subjects": {
+        "high_school_computer_science": {
+          "acc": 0.58,
+          "n": 100
+        },
+        "high_school_mathematics": {
+          "acc": 0.2519,
+          "n": 270
+        },
+        "high_school_world_history": {
+          "acc": 0.7426,
+          "n": 237
+        }
+      },
+      "mode": "zero-shot",
+      "model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "n": 2122,
+      "n_test_qrels": 2122,
+      "n_test_queries": 10,
+      "per_class": {
+        "irrelevant": {
+          "f1": 0.47352941176470587,
+          "precision": 0.8911439114391144,
+          "recall": 0.32242990654205606,
+          "support": 1498
+        },
+        "partial": {
+          "f1": 0.013114754098360656,
+          "precision": 0.4,
+          "recall": 0.006666666666666667,
+          "support": 300
+        },
+        "relevant": {
+          "f1": 0.3149025803054239,
+          "precision": 0.18984126984126984,
+          "recall": 0.9228395061728395,
+          "support": 324
+        }
+      },
+      "prompt_sha256": "10527ec441f9281a",
+      "test_qids": [
+        "1109707",
+        "1127540",
+        "1133579",
+        "1136047",
+        "169208",
+        "23849",
+        "258062",
+        "47210",
+        "673670",
+        "877809"
+      ]
+    },
+    "finetuned": {
+      "accuracy": 0.644674835061263,
+      "confusion_matrix": {
+        "labels": [
+          "irrelevant",
+          "partial",
+          "relevant"
+        ],
+        "matrix": [
+          [
+            1208,
+            111,
+            179
+          ],
+          [
+            162,
+            40,
+            98
+          ],
+          [
+            152,
+            52,
+            120
+          ]
+        ]
+      },
+      "forgetting": {
+        "bar": 0.9,
+        "baseline_mmlu": 0.4975,
+        "finetuned_mmlu": 0.4712,
+        "passes": true,
+        "retention": 0.9471356783919598
+      },
+      "macro_f1": 0.4306389127095955,
+      "mmlu_finetuned": 0.4712,
+      "model": "Qwen/Qwen2.5-1.5B-Instruct + qlora-sft",
+      "n": 2122,
+      "n_test_qrels": 2122,
+      "n_test_queries": 10,
+      "per_class": {
+        "irrelevant": {
+          "f1": 0.8,
+          "precision": 0.7936925098554534,
+          "recall": 0.8064085447263017,
+          "support": 1498
+        },
+        "partial": {
+          "f1": 0.15904572564612326,
+          "precision": 0.19704433497536947,
+          "recall": 0.13333333333333333,
+          "support": 300
+        },
+        "relevant": {
+          "f1": 0.332871012482663,
+          "precision": 0.3022670025188917,
+          "recall": 0.37037037037037035,
+          "support": 324
+        }
+      },
+      "prompt_sha256": "10527ec441f9281a"
+    }
+  },
+  "model": {
+    "adapter_ref": "sallahahmed/qwen2.5-1.5b-relevance-grader",
+    "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "device": "cpu",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "load_error": null,
+    "max_new_tokens": 160,
+    "quantized": false,
+    "top_k": 4,
+    "using_adapter": true
+  },
+  "recorded_from": "src/record_demo_trace.py"
+}

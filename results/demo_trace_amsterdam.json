@@ -1,0 +1,298 @@
+{
+  "arms": {
+    "off": {
+      "answer": "Trains run until approximately midnight in Amsterdam. Yes, you can use a contactless bank card to purchase a one-hour ticket for the train stations. Passage numbers: [1], [3]",
+      "context_ids": [
+        0,
+        6,
+        1,
+        3
+      ],
+      "generator_id": "qwen-local",
+      "graded": [],
+      "grounded": true,
+      "n_kept": 4,
+      "n_retrieved": 4,
+      "note": "",
+      "query": "How late do trains run in Amsterdam, and can I pay with a bank card?",
+      "retrieved": [
+        {
+          "chunk_id": 0,
+          "score": 0.5708267092704773,
+          "source": "amsterdam/p1",
+          "text": "Night trains from Utrecht, Rotterdam and Den Haag reach Amsterdam Centraal between roughly 00:30 and 02:30. The last direct service is around 02:00, so a flight the next morning usually needs a hotel near the station rather than a night bus."
+        },
+        {
+          "chunk_id": 6,
+          "score": 0.5211135149002075,
+          "source": "amsterdam/p7",
+          "text": "Amsterdam Centraal is about fifteen minutes by direct train from Schiphol airport, and every twelve minutes or so outside the peaks. Night buses also run from the airport but take close to an hour."
+        },
+        {
+          "chunk_id": 1,
+          "score": 0.4604439437389374,
+          "source": "amsterdam/p2",
+          "text": "You can tap a contactless bank card on the platform gates and buy a one-hour ticket without an account. Each tap starts a new hour, and checking in and out with the same card keeps the fare calculated per journey."
+        },
+        {
+          "chunk_id": 3,
+          "score": 0.3530331552028656,
+          "source": "amsterdam/p4",
+          "text": "The Rijksmuseum opens daily at 09:00 and closes at 17:00, with last entry an hour before closing. The Anne Frank House sells timed-entry tickets online only and is often booked out weeks ahead."
+        }
+      ],
+      "used_grader": false
+    },
+    "on": {
+      "answer": "Trains run until about midnight, but there's no mention of paying with a bank card. [1]\n\nThe relevant passage number for this answer is [1].",
+      "context_ids": [
+        0
+      ],
+      "generator_id": "qwen-local",
+      "graded": [
+        {
+          "accepted": false,
+          "chunk_id": 3,
+          "confidence": 0.9989054203033447,
+          "label": "irrelevant",
+          "rank": 1,
+          "retrieval_score": 0.3530331552028656,
+          "score": 0.9989054203033447,
+          "source": "amsterdam/p4",
+          "text": "The Rijksmuseum opens daily at 09:00 and closes at 17:00, with last entry an hour before closing. The Anne Frank House sells timed-entry tickets online only and is often booked out weeks ahead."
+        },
+        {
+          "accepted": false,
+          "chunk_id": 6,
+          "confidence": 0.9699552059173584,
+          "label": "irrelevant",
+          "rank": 2,
+          "retrieval_score": 0.5211135149002075,
+          "score": 0.9699552059173584,
+          "source": "amsterdam/p7",
+          "text": "Amsterdam Centraal is about fifteen minutes by direct train from Schiphol airport, and every twelve minutes or so outside the peaks. Night buses also run from the airport but take close to an hour."
+        },
+        {
+          "accepted": false,
+          "chunk_id": 1,
+          "confidence": 0.87068772315979,
+          "label": "irrelevant",
+          "rank": 3,
+          "retrieval_score": 0.4604439437389374,
+          "score": 0.87068772315979,
+          "source": "amsterdam/p2",
+          "text": "You can tap a contactless bank card on the platform gates and buy a one-hour ticket without an account. Each tap starts a new hour, and checking in and out with the same card keeps the fare calculated per journey."
+        },
+        {
+          "accepted": true,
+          "chunk_id": 0,
+          "confidence": 0.5832279324531555,
+          "label": "relevant",
+          "rank": 4,
+          "retrieval_score": 0.5708267092704773,
+          "score": 0.5832279324531555,
+          "source": "amsterdam/p1",
+          "text": "Night trains from Utrecht, Rotterdam and Den Haag reach Amsterdam Centraal between roughly 00:30 and 02:30. The last direct service is around 02:00, so a flight the next morning usually needs a hotel near the station rather than a night bus."
+        }
+      ],
+      "grounded": true,
+      "n_kept": 1,
+      "n_retrieved": 4,
+      "note": "",
+      "query": "How late do trains run in Amsterdam, and can I pay with a bank card?",
+      "retrieved": [
+        {
+          "chunk_id": 0,
+          "score": 0.5708267092704773,
+          "source": "amsterdam/p1",
+          "text": "Night trains from Utrecht, Rotterdam and Den Haag reach Amsterdam Centraal between roughly 00:30 and 02:30. The last direct service is around 02:00, so a flight the next morning usually needs a hotel near the station rather than a night bus."
+        },
+        {
+          "chunk_id": 6,
+          "score": 0.5211135149002075,
+          "source": "amsterdam/p7",
+          "text": "Amsterdam Centraal is about fifteen minutes by direct train from Schiphol airport, and every twelve minutes or so outside the peaks. Night buses also run from the airport but take close to an hour."
+        },
+        {
+          "chunk_id": 1,
+          "score": 0.4604439437389374,
+          "source": "amsterdam/p2",
+          "text": "You can tap a contactless bank card on the platform gates and buy a one-hour ticket without an account. Each tap starts a new hour, and checking in and out with the same card keeps the fare calculated per journey."
+        },
+        {
+          "chunk_id": 3,
+          "score": 0.3530331552028656,
+          "source": "amsterdam/p4",
+          "text": "The Rijksmuseum opens daily at 09:00 and closes at 17:00, with last entry an hour before closing. The Anne Frank House sells timed-entry tickets online only and is often booked out weeks ahead."
+        }
+      ],
+      "used_grader": true
+    }
+  },
+  "corpus": {
+    "description": "Eight notes from a travel desk. Four are about trains and paying; four are about opening hours and sights, which retrieve well on the word 'hours'.",
+    "expected_gate": "Keep the night-train, tap-to-pay and OVpay notes; the museum hours and cruise notes are decoys that match on 'hours' and 'run'.",
+    "key": "amsterdam",
+    "n_passages": 8,
+    "query": "How late do trains run in Amsterdam, and can I pay with a bank card?",
+    "title": "Amsterdam travel desk"
+  },
+  "metrics": {
+    "baseline": {
+      "accuracy": 0.3694627709707823,
+      "confusion_matrix": {
+        "labels": [
+          "irrelevant",
+          "partial",
+          "relevant"
+        ],
+        "matrix": [
+          [
+            483,
+            3,
+            1012
+          ],
+          [
+            34,
+            2,
+            264
+          ],
+          [
+            25,
+            0,
+            299
+          ]
+        ]
+      },
+      "date": "2026-09-09",
+      "macro_f1": 0.26718224872283014,
+      "mmlu_baseline": 0.4975,
+      "mmlu_n": 607,
+      "mmlu_subjects": {
+        "high_school_computer_science": {
+          "acc": 0.58,
+          "n": 100
+        },
+        "high_school_mathematics": {
+          "acc": 0.2519,
+          "n": 270
+        },
+        "high_school_world_history": {
+          "acc": 0.7426,
+          "n": 237
+        }
+      },
+      "mode": "zero-shot",
+      "model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "n": 2122,
+      "n_test_qrels": 2122,
+      "n_test_queries": 10,
+      "per_class": {
+        "irrelevant": {
+          "f1": 0.47352941176470587,
+          "precision": 0.8911439114391144,
+          "recall": 0.32242990654205606,
+          "support": 1498
+        },
+        "partial": {
+          "f1": 0.013114754098360656,
+          "precision": 0.4,
+          "recall": 0.006666666666666667,
+          "support": 300
+        },
+        "relevant": {
+          "f1": 0.3149025803054239,
+          "precision": 0.18984126984126984,
+          "recall": 0.9228395061728395,
+          "support": 324
+        }
+      },
+      "prompt_sha256": "10527ec441f9281a",
+      "test_qids": [
+        "1109707",
+        "1127540",
+        "1133579",
+        "1136047",
+        "169208",
+        "23849",
+        "258062",
+        "47210",
+        "673670",
+        "877809"
+      ]
+    },
+    "finetuned": {
+      "accuracy": 0.644674835061263,
+      "confusion_matrix": {
+        "labels": [
+          "irrelevant",
+          "partial",
+          "relevant"
+        ],
+        "matrix": [
+          [
+            1208,
+            111,
+            179
+          ],
+          [
+            162,
+            40,
+            98
+          ],
+          [
+            152,
+            52,
+            120
+          ]
+        ]
+      },
+      "forgetting": {
+        "bar": 0.9,
+        "baseline_mmlu": 0.4975,
+        "finetuned_mmlu": 0.4712,
+        "passes": true,
+        "retention": 0.9471356783919598
+      },
+      "macro_f1": 0.4306389127095955,
+      "mmlu_finetuned": 0.4712,
+      "model": "Qwen/Qwen2.5-1.5B-Instruct + qlora-sft",
+      "n": 2122,
+      "n_test_qrels": 2122,
+      "n_test_queries": 10,
+      "per_class": {
+        "irrelevant": {
+          "f1": 0.8,
+          "precision": 0.7936925098554534,
+          "recall": 0.8064085447263017,
+          "support": 1498
+        },
+        "partial": {
+          "f1": 0.15904572564612326,
+          "precision": 0.19704433497536947,
+          "recall": 0.13333333333333333,
+          "support": 300
+        },
+        "relevant": {
+          "f1": 0.332871012482663,
+          "precision": 0.3022670025188917,
+          "recall": 0.37037037037037035,
+          "support": 324
+        }
+      },
+      "prompt_sha256": "10527ec441f9281a"
+    }
+  },
+  "model": {
+    "adapter_ref": "sallahahmed/qwen2.5-1.5b-relevance-grader",
+    "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "device": "cpu",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "load_error": null,
+    "max_new_tokens": 160,
+    "quantized": false,
+    "top_k": 4,
+    "using_adapter": true
+  },
+  "recorded_from": "src/record_demo_trace.py"
+}
