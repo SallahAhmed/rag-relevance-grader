@@ -10,7 +10,7 @@ import json
 
 
 def test_legacy_trace_replays(app, trace):
-    result = app._replay_result("espresso", "what is pressure?")
+    result = app._replay_result("espresso", trace["corpus"]["query"])
     assert result is not None, "espresso has a recorded trace but replay returned None"
     assert result["mode"] == "replay"
     on = result["on"]
