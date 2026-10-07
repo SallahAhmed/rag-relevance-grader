@@ -1,0 +1,5 @@
+# CI-only dependencies. The app itself runs on the Space's own environment
+# (space_gradio/requirements.txt) and the notebooks on requirements.txt.
+pytest>=8.0
+ruff>=0.4
+pyyaml>=6.0
